@@ -22,7 +22,7 @@ app.get("/users/:id", (req, res) => {
         const users = JSON.parse(data);
         let user = null;
         for (let i = 0; i < users.length; i++) {
-            if (users[i].id == id) {
+            if (users[i].id === id) {
                 user = users[i];
                 break;
             }
@@ -50,7 +50,7 @@ app.post("/users", jsonParser, (req, res) => {
         user.id = id + 1;
         users.push(user);
         data = JSON.stringify(users);
-        fs.writeFile("users.json", data, (err) => {
+        fs.writeFile("users.json", data, () => {
         });
         res.send(user);
     })
@@ -62,7 +62,7 @@ app.delete("/users/:id", (req, res) => {
         let users = JSON.parse(data);
         let index = -1;
         for (let i = 0; i < users.length; i++) {
-            if (users[i].id == id) {
+            if (users[i].id === id) {
                 index = i;
                 break;
             }
@@ -70,7 +70,7 @@ app.delete("/users/:id", (req, res) => {
         if (index > -1) {
             const user = users.splice(index, 1)[0];
             data = JSON.stringify(users);
-            fs.writeFile("users.json", data, (err) => { });
+            fs.writeFile("users.json", data, () => { });
             res.send(user);
         } else {
             res.status(404).send();
@@ -91,7 +91,7 @@ app.put("/users", jsonParser, (req, res) => {
         const users = JSON.parse(data);
         let user;
         for (let i = 0; i < users.length; i++) {
-            if (users[i].id == userId) {
+            if (users[i].id === userId) {
                 user = users[i];
                 break;
             }
@@ -101,7 +101,7 @@ app.put("/users", jsonParser, (req, res) => {
             user.age = userAge;
             user.name = userName;
             data = JSON.stringify(users);
-            fs.writeFile("users.json", data, (err) => { });
+            fs.writeFile("users.json", data, () => { });
             res.send(user);
         }
         else {
